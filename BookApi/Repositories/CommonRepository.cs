@@ -41,7 +41,7 @@ namespace BookApi.Repositories
             var entity = await _context.Set<T>().FindAsync(id);
             if (entity == null)
             {
-                throw new KeyNotFoundException($"Entity with id {id} not found.");
+                return null;
             }
             else
             {
@@ -54,7 +54,7 @@ namespace BookApi.Repositories
             var existingEntity = await _context.Set<T>().FindAsync(id);
             if (existingEntity == null)
             {
-                throw new KeyNotFoundException($"Entity with id {id} not found.");
+                return null;
             }
             _context.Entry(existingEntity).CurrentValues.SetValues(entity);
             await _context.SaveChangesAsync();
