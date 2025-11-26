@@ -1,4 +1,6 @@
 using BookApi.Dal;
+using BookApi.Models;
+using BookApi.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,8 @@ builder.Services.AddDbContext<ApplicationDbContext>( options =>
         ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
         );
 });
+
+builder.Services.AddTransient<ICommonRepository<Book>, CommonRepository<Book>>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
